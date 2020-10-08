@@ -79,9 +79,8 @@ configure_system(){
 configrue_drive(){
 	print_title "configrue_drive"
         arch_chroot "pacman -S --noconfirm xorg-server xorg-twm xorg-xclock xorg-server -y"
-	arch_chroot "pacman -S --noconfirm bumblebee -y"
-        arch_chroot "systemctl enable bumblebeed"
-        arch_chroot "pacman -S --noconfirm nvidia-dkms nvidia-utils nvidia-settings xf86-input-synaptics -y"        
+	    arch_chroot "pacman -S --noconfirm bumblebee -y"
+        arch_chroot "systemctl enable bumblebeed"      
         arch_chroot "intel-ucode -y"
         # arch_chroot "amd-ucode -y"
 }
