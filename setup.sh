@@ -120,10 +120,10 @@ configure_hostname(){
 #添加本地域名
 configure_username(){
         print_title "configure_username"
-        read -p "Username [ex: archlinux]: " User
+        read -p "Username [ex: archlinux]: " yangcan
         arch_chroot "pacman -S --noconfirm sudo zsh -y"
-        arch_chroot "useradd -m -g users -G wheel -s /bin/zsh $User"
-        arch_chroot "passwd $User"
+        arch_chroot "useradd -m -g users -G wheel -s /bin/zsh $yangcan"
+        arch_chroot "passwd $yangcan"
         arch_chroot "sed -i 's/\# \%wheel ALL=(ALL) ALL/\%wheel ALL=(ALL) ALL/g' /etc/sudoers"
 	arch_chroot "sed -i 's/\# \%wheel ALL=(ALL) NOPASSWD: ALL/\%wheel ALL=(ALL) NOPASSWD: ALL/g' /etc/sudoers"
         umount -R /mnt
