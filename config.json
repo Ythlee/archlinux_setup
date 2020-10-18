@@ -1,0 +1,12 @@
+{
+	"server": "172.104.127.208",
+	"server_port": 8099,
+	"local_address": "127.0.0.1",
+	"local_port": 1080,
+	"password": "eIW0Dnk69454e6nSwuspv9DmS201tQ0D",
+	"timeout": 300,
+	"method": "aes-256-cfb",
+	"fast_open": false,
+	"workers": 1,
+	"prefer_ipv6": false
+}
