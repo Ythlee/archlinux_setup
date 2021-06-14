@@ -1,0 +1,94 @@
+setfont /usr/share/kbd/consolefonts/LatGrkyr-12*12.psfu.gz
+ip link set wlan0 up
+iwlist wlan0 scan | greap ESSID
+wpa_passhprase 网络 密码 > 文件名(interner.conf)
+wpa_supplicant -c interner.conf -i wlan0 &
+dhcpcd &
+
+timedatectl set-ntp true
+fdisk -l
+磁盘分区：
+mkfs.fat -F32 /dev/sda1
+mkfs.ext4 /dev/sda2
+mkswap /dev/sda3
+swapon /dev/sda3
+
+vim /etc/pacman.d/mirrorlist
+Server = https://mirrors.tuna.tsinghua.edu.cn/archlinux/$repo/os/$arch
+Server = http://mirrors.163.com/archlinux/$repo/os/$arch
+
+挂载磁盘:
+mount /dev/sda2 /mnt
+mkdir /mnt/boot
+mount /dev/sda1 /mnt/boot
+pacstrap /mnt base linux linux-firmware
+
+genfstab -U /mnt >> /mnt/etc/fstab
+
+arch-chroot /mnt
+ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+hwclock --systohc
+
+pacman -S neovim
+nvim /etc/locale.gen
+#en_UD.UTF-8 UTF-8 ----> en_US.UTF-8 UTF-8(去掉注释)
+nvim /etc/locale.conf
+LANG=en_US.UTF-8
+
+
+nvim /etc/hostname  //该计算机在网络下的名字 
+Ythlee
+
+nvim /etc/hosts
+127.0.0.1	localhost
+::1		localhost
+127.0.0.1	Ythlee.localdomain Ythlee
+
+
+passwd
+输入你的密码：
+
+
+pacman -S grub efibootmgr intel-ucode os-prober
+
+mkdir /boot/grub
+grub-mkconfig > /boot/grub/grub.cfg
+uname -m
+grub-install --target=x86_64-efi --efi-directory=/boot
+
+pacman -S vi zsh wpa_supplicant dhcpcd
+
+exit
+reboot
+
+
+
+root
+输入你的密码
+dhcpcd&
+pacman -Syyu
+
+pacman -S man
+pacman -S base-devel
+
+useradd -m -G wheel yangcan
+passwd yangcan
+输入你的密码
+
+visudo
+# %wheel ALL=(ALL) ALL  ----> %wheel ALL=(ALL) ALL (去掉注释)
+sudo pacman -Syyu
+
+
+sudo pacman -S xorg xorg-server
+sudo pacman -S deepin deepin-extra
+
+sudo nvim /etc/lightdm/lightdm.conf
+
+greeter-session=lightdm-deepin-greeter
+sudo systemctl enable lightdm
+sudo systemctl start lightdm
+
+
+
+
